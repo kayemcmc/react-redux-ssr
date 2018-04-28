@@ -969,18 +969,21 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(52);
 
+var _Home = __webpack_require__(32);
+
+var _Home2 = _interopRequireDefault(_Home);
+
 var _Routes = __webpack_require__(51);
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Startup point for the client side application
 _reactDom2.default.hydrate(_react2.default.createElement(
     _reactRouterDom.BrowserRouter,
     null,
-    _react2.default.createElement(Home, null)
-), document.querySelector('#root'));
+    _react2.default.createElement(_Home2.default, null)
+), document.querySelector('#root')); // Startup point for the client side application
 
 /***/ }),
 /* 16 */
