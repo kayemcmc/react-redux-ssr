@@ -14,12 +14,11 @@ export default (req, store) => {
     );
     return `
       <html>
-        <head>
+        <head> </head>
           <body>
             <div id="root">${content}</div>
             <script src="bundle.js"></script>
-          </body>
-        </head>
+          </body> 
       </html>
     `;
 };
