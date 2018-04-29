@@ -7880,7 +7880,7 @@ var _axios = __webpack_require__(458);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _path = __webpack_require__(479);
+var _path = __webpack_require__(477);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8224,14 +8224,14 @@ var _Routes = __webpack_require__(455);
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
-var _reducers = __webpack_require__(477);
+var _reducers = __webpack_require__(478);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Startup point for the client side application
-var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+var store = (0, _redux.createStore)(_reducers2.default, window.INITIAL_STATE, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 
 _reactDom2.default.hydrate(_react2.default.createElement(
     _reactRedux.Provider,
@@ -37982,29 +37982,28 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Home = __webpack_require__(456);
+var _HomePage = __webpack_require__(456);
 
-var _Home2 = _interopRequireDefault(_Home);
+var _HomePage2 = _interopRequireDefault(_HomePage);
 
-var _UsersList = __webpack_require__(457);
+var _UsersListPage = __webpack_require__(457);
 
-var _UsersList2 = _interopRequireDefault(_UsersList);
+var _UsersListPage2 = _interopRequireDefault(_UsersListPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = [{
+exports.default = [_extends({}, _HomePage2.default, {
   path: '/',
-  component: _Home2.default,
   exact: true
-}, {
-  loadData: _UsersList.loadData,
-  path: '/users',
-  component: _UsersList2.default
-}];
+}), _extends({}, _UsersListPage2.default, {
+  path: '/users'
+})];
 
 /***/ }),
 /* 456 */
@@ -38042,7 +38041,9 @@ var Home = function Home() {
   );
 };
 
-exports.default = Home;
+exports.default = {
+  component: Home
+};
 
 /***/ }),
 /* 457 */
@@ -38054,7 +38055,6 @@ exports.default = Home;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.loadData = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -38128,8 +38128,10 @@ var loadData = function loadData(store) {
   return store.dispatch((0, _actions.fetchUsers)());
 };
 
-exports.loadData = loadData;
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchUsers: _actions.fetchUsers })(UsersList);
+exports.default = {
+  loadData: loadData,
+  component: (0, _reactRedux.connect)(mapStateToProps, { fetchUsers: _actions.fetchUsers })(UsersList)
+};
 
 /***/ }),
 /* 458 */
@@ -39009,54 +39011,6 @@ module.exports = function spread(callback) {
 /* 477 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _redux = __webpack_require__(113);
-
-var _usersReducer = __webpack_require__(478);
-
-var _usersReducer2 = _interopRequireDefault(_usersReducer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = (0, _redux.combineReducers)({
-    users: _usersReducer2.default
-});
-
-/***/ }),
-/* 478 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _actions = __webpack_require__(175);
-
-exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  switch (action.type) {
-    case _actions.FETCH_USERS:
-      return action.payload.data;
-    default:
-      return state;
-  }
-};
-
-/***/ }),
-/* 479 */
-/***/ (function(module, exports, __webpack_require__) {
-
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -39283,6 +39237,54 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+
+/***/ }),
+/* 478 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _redux = __webpack_require__(113);
+
+var _usersReducer = __webpack_require__(479);
+
+var _usersReducer2 = _interopRequireDefault(_usersReducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+    users: _usersReducer2.default
+});
+
+/***/ }),
+/* 479 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _actions = __webpack_require__(175);
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _actions.FETCH_USERS:
+      return action.payload.data;
+    default:
+      return state;
+  }
+};
 
 /***/ })
 /******/ ]);
