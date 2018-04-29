@@ -8,7 +8,7 @@ componentDidMount() {
 }
 
 renderUsers() {
-    this.props.users.map(user => {
+    return this.props.users.map(user => {
         return <li key={user.id}>{user.name}</li>
     });
 }
@@ -27,4 +27,10 @@ const mapStateToProps = state => ({
     users: state.users
 })
 
+const loadData = (store) => {
+  return store.dispatch(fetchUsers());
+}
+
+
+export { loadData };
 export default connect(mapStateToProps, { fetchUsers })(UsersList);

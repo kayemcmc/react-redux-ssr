@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { resolve } from 'path';
 
 export const FETCH_USERS = 'fetch_users';
 export const fetchUsers = () => async dispatch => {
@@ -8,4 +9,5 @@ export const fetchUsers = () => async dispatch => {
     type: FETCH_USERS,
     payload: res
   });
+  console.log(res);
 };
